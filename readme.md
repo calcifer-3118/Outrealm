@@ -114,7 +114,7 @@ A WASD-movement based third-person controller class.
 
 ## License
 
-MIT License. See [LICENSE](./LICENSE) for details.
+MIT License. See [LICENSE](./lib/LICENSE) for details.
 
 ---
 
@@ -134,12 +134,8 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 
 ## Author
 
-[Dheer Jain](https://github.com/dheerjain)
+[Dheer Jain](https://github.com/calcifer-3118)
 
 ---
 
 Enjoy building seamless virtual experiences with **Outrealm**!
-
-```
-
-```
