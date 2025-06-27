@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/outrealm.svg?style=flat-square)](https://www.npmjs.com/package/outrealm)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/yourusername/outrealm/ci.yml?branch=main&style=flat-square)](https://github.com/calcifer-3118/Outrealm/actions)
-[![License](https://img.shields.io/npm/l/outrealm?style=flat-square)](./lib/LICENSE)
+[![License](https://img.shields.io/npm/l/outrealm?style=flat-square)](LICENSE)
 [![Downloads](https://img.shields.io/npm/dm/outrealm.svg?style=flat-square)](https://www.npmjs.com/package/outrealm)
 [![GitHub Stars](https://img.shields.io/github/stars/yourusername/outrealm?style=flat-square)](https://github.com/calcifer-3118/Outrealm/stargazers)
 [![GitHub Issues](https://img.shields.io/github/issues/yourusername/outrealm?style=flat-square)](https://github.com/calcifer-3118/Outrealm/issues)
@@ -114,7 +114,7 @@ A WASD-movement based third-person controller class.
 
 ## License
 
-MIT License. See [LICENSE](./lib/LICENSE) for details.
+MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
