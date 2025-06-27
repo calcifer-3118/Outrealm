@@ -1,0 +1,10 @@
+{
+  "name": "outrealm",
+  "version": "0.1.0",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "seamless-interdomain-transition": "^0.1.1",
+    "three": "^0.177.0"
+  }
+}
