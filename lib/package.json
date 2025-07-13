@@ -1,6 +1,6 @@
 {
   "name": "outrealm",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Seamless inter-domain portals and third-person player controller for 3D web experiences using Three.js.",
   "main": "index.js",
   "type": "module",

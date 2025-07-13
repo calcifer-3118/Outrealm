@@ -1,11 +1,11 @@
 # Outrealm
 
 [![npm version](https://img.shields.io/npm/v/outrealm.svg?style=flat-square)](https://www.npmjs.com/package/outrealm)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/yourusername/outrealm/ci.yml?branch=main&style=flat-square)](https://github.com/calcifer-3118/Outrealm/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/calcifer-3118/Outrealm/ci.yml?branch=main&style=flat-square)](https://github.com/calcifer-3118/Outrealm/actions)
 [![License](https://img.shields.io/npm/l/outrealm?style=flat-square)](LICENSE)
 [![Downloads](https://img.shields.io/npm/dm/outrealm.svg?style=flat-square)](https://www.npmjs.com/package/outrealm)
-[![GitHub Stars](https://img.shields.io/github/stars/yourusername/outrealm?style=flat-square)](https://github.com/calcifer-3118/Outrealm/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/yourusername/outrealm?style=flat-square)](https://github.com/calcifer-3118/Outrealm/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/calcifer-3118/Outrealm?style=flat-square)](https://github.com/calcifer-3118/Outrealm/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/calcifer-3118/Outrealm?style=flat-square)](https://github.com/calcifer-3118/Outrealm/issues)
 
 ---
 
@@ -22,8 +22,11 @@ Perfect for modular virtual worlds, multi-scene portfolios, or any app requiring
 
 - Store and transfer user state securely via backend API
 - Seamless fade transition effect between domains
-- Built-in `ThirdPersonPlayer` class with smooth WASD movement and third-person camera
-- Optional GLTF animation support
+- Built-in `ThirdPersonPlayer` class with:
+  - Smooth WASD movement
+  - Modular animation blending (walk/idle)
+  - Pointer lock support
+  - Optional grid-based collision using `sharedGrid`
 - Easy integration with any Three.js project
 
 ---
@@ -59,7 +62,6 @@ import { receivePortalUserState } from "outrealm";
 
 const userState = await receivePortalUserState();
 if (userState) {
-  // Apply position, rotation, etc. to player
   player.model.position.set(
     userState.position.x,
     userState.position.y,
@@ -74,10 +76,18 @@ if (userState) {
 ```js
 import { ThirdPersonPlayer } from "outrealm";
 
+// Optional imports for collision
+import { sharedGrid, updateSharedObstacles } from "./your/grid/setup";
+
 const player = new ThirdPersonPlayer({
   model: gltf.scene,
   camera: camera,
-  walkAnimationClip: gltf.animations[0], // optional
+  walkAnimationClip: gltf.animations[0],
+  idleAnimationClip: gltf.animations[1], // optional
+  enablePointerLock: true,
+  useCollision: true,
+  sharedGrid, // optional for grid-based navigation
+  updateSharedObstacles, // optional for runtime obstacle sync
 });
 
 // In your animation loop
@@ -98,17 +108,32 @@ Saves the current user state and transitions to a new domain.
 - `userState` (object): The state object to transfer (e.g. position, rotation)
 - `options` (object, optional): Options passed to the transition animation
 
+---
+
 ### `receivePortalUserState()`
 
 Returns a promise that resolves with the user state received from the backend, or `null` if invalid.
 
-### `ThirdPersonPlayer({ model, camera, walkAnimationClip })`
+---
 
-A WASD-movement based third-person controller class.
+### `ThirdPersonPlayer(config)`
 
-- `model` (THREE.Object3D): The 3D character model
-- `camera` (THREE.Camera): The camera to follow the player
-- `walkAnimationClip` (THREE.AnimationClip, optional): An optional walk animation
+A modular third-person character controller with pointer-lock, animation, and collision support.
+
+**Required:**
+
+- `model` (THREE.Object3D): The GLTF/FBX 3D model
+- `camera` (THREE.Camera): The camera that follows the player
+
+**Optional:**
+
+- `walkAnimationClip` (THREE.AnimationClip): Walk animation
+- `idleAnimationClip` (THREE.AnimationClip): Idle animation
+- `enablePointerLock` (boolean): Enable camera rotation with mouse
+- `pitchLimits` (object): Clamp vertical pitch. Default: `{ min: -π/4, max: π/4 }`
+- `useCollision` (boolean): Enable grid-based collision detection
+- `sharedGrid` (object): Your `Grid` instance for walkability
+- `updateSharedObstacles` (function): Updates grid obstacles (if needed)
 
 ---
 
